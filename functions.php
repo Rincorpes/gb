@@ -8,8 +8,6 @@
  * @package gb
  */
 
-define('DEV_ENV', true);
-
 /**
  * Get function file located in the functions directory
  *
@@ -124,6 +122,11 @@ require_once gb_get_function_path('facebook');
  */
 require_once gb_get_function_path('adsense');
 
+/**
+ * Get posts filtered
+ *
+ * @since 1.0
+ */
 function gb_get_posts($params = array())
 {
 	$posts_per_page = (isset($params['posts_per_page'])) ? $params['posts_per_page'] : '10';
@@ -141,6 +144,11 @@ function gb_get_posts($params = array())
 	return $sliderPosts;
 }
 
+/**
+ * Get the title from the loop
+ *
+ * @since 1.0
+ */
 function gb_get_loop_title()
 {
 	$curauth = (get_query_var('author_name')) ? get_user_by('slug', get_query_var('author_name')) : get_userdata(get_query_var('author'));
@@ -158,6 +166,8 @@ function gb_get_loop_title()
 }
 /**
  * Shows the paginate links
+ *
+ * @since 1.0
  */
 if (!function_exists('gb_paginate_links')) : 
 	function gb_paginate_links()
@@ -186,7 +196,9 @@ if (!function_exists('gb_paginate_links')) :
 endif;
 
 /**
- * Shows the paginate links
+ * Shows comments
+ *
+ * @since 1.0
  */
 if (!function_exists('gb_comments')) : 
 	function gb_comments($comment, $args, $depth)
@@ -240,6 +252,11 @@ if (!function_exists('gb_comments')) :
 	}
 endif;
 
+/**
+ * Subscribe form action
+ *
+ * @since 1.0
+ */
 function gb_subscribe()
 {
 	$apiKey = '19181c8755c60914bbdea2b7da939bb0-us15';

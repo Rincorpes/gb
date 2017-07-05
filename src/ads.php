@@ -1,9 +1,15 @@
 <?php
 /**
- * Load Gb ads
+ * Gb Ads
  *
  * @package gb
- * @subpackage gb-ad
+ * @subpackage gb-ads
+ */
+
+/**
+ * Choose ad config and load it
+ *
+ * @since 1.0
  */
 class GbAd
 {
@@ -41,7 +47,9 @@ class GbAd
 
 		$this->loadAd();
 	}
-
+	/**
+	 * Get ad config and load it
+	 */
 	private function loadAd()
 	{
 		if (!$opt = $this->getAdPosition()) {
@@ -121,7 +129,7 @@ class GbAd
 		return $class;
 	}
 	/**
-	 * Gets the ad content
+	 * Get the ad content
 	 */
 	private function getAd()
 	{
@@ -163,6 +171,35 @@ class GbAd
 
 /**
  * Loads ads
+ * This function can be used enywhere you want to load an add.
+ * Gb Ads works with chitika and AdSense.
+ *
+ * @example Follow this instructions
+ *
+ * 		- First of all, you need to crate your add using chitika or AdSense.
+ *
+ * 		- Save the script with the following name structure:
+ * 			ads-<vendor>-<size>.php
+ * 			Where vendor equals 'adsense' or 'chitika', and size equals 300x250 or 300x600 or 728x90
+ * 			For example: `ads-adsense-300x250.php`
+ *
+ * 		- Now, wherever you nedd your ad, add the following example code
+ * 			<?php gb_get_ad('sidebar', 'square', 'adsense',); '>
+ *
+ * 		- Position in this template are: 
+ * 			header, main, sidebar and footer. You can change them in the `getAdPosition()` method
+ * 			from the `GbAd` class.
+ *
+ * 		- The ad types are:
+ *			'square' 		= 300x250 px
+ *			'horizontal' 	= 728x90 px
+ * 			'vertical' 	= 300x600 px
+ *
+ *	@since 1.0
+ *
+ * @param string $position Where the ad will be shown
+ * @param string $type The add type for its size
+ * @param string $ad The third party company: chitika or adsense
  */
 function gb_get_ad($position, $type, $ad = null)
 {

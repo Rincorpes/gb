@@ -1,6 +1,12 @@
 <?php
 /**
- * Add basic meta tags at the begining of the header.
+ * Add meta tags to the HTML `<head>` tag.
+ *
+ * @since 1.0
+ */
+
+/**
+ * Add the initial meta tags.
  *
  * @since 1.0
  */
@@ -12,6 +18,11 @@ function gb_add_metatags()
 }
 add_action('wp_head', 'gb_add_metatags', 0);
 
+/**
+ * Add Open graph and twitter meta tags.
+ *
+ * @since 1.0
+ */
 function gb_opengrapf()
 {
 	global $page, $paged; 

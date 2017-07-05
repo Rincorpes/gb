@@ -17,7 +17,29 @@ register_nav_menus(
 		));
 
 /**
- * Custom navar
+ * Get a custom navar.
+ *
+ * @since 1.0
+ *
+ * @example Wherever you need to add a navbar you junt need to know
+ * its nice name and you can pass any class you want to add to the
+ * `<ul>` tag and your custom walher params.
+ *
+ * 		<php gb_navbar('nicename', 'center', array('nav_item_has_children_class' => 'my-dropdown-class')); ?>
+ * 
+ * @uses wp_nav_menu();
+ *
+ * @param string $name The nicename for the menu, the one you used in the `register_nav_menu()` function
+ * @param string $classes The classes you want to add to the HTML `<ul>` tag
+ * @param array $walker_params The params you want to add to the walker.
+ * 
+ * 			Acepter params in $walker_params array:
+ *
+ * 			'nav_item_class' The class for each `<li>` inside the main `<ul>`
+ * 			'nav_item_has_children_class' If the itam has an `<ul>` inside, add the class you want
+ *			'nav_item_has_children_link_class' The class for each link inside a item that hass children
+ *			'nav_item_has_children_link_extras' If you need some extra HTML attrs.
+ *			'nav_children_class'  The class for the children `<ul>`
  */
 function gb_navbar($name, $classes = null, $walker_params = null)
 {
@@ -51,6 +73,9 @@ function gb_navbar($name, $classes = null, $walker_params = null)
 
 /**
  * Primary nav walker
+ * This class will help you to custom each menu
+ *
+ * @since 1.0
  */
 class Prymary_Nav_Walker extends Walker_Nav_Menu
 {
@@ -66,6 +91,9 @@ class Prymary_Nav_Walker extends Walker_Nav_Menu
 
 		return parent::display_element($element, $children_elements, $max_depth, $depth, $args, $output);
 	}
+	/**
+	 * The start elemment
+	 */
 	public function start_el(&$output, $item, $depth, $args)
 	{
 		$classes = array();
@@ -129,12 +157,16 @@ class Prymary_Nav_Walker extends Walker_Nav_Menu
 			,   $args
 		);
 	}
-
+	/**
+	 * The end element
+	 */
 	function end_el(&$output)
 	{
 		$output .= '</li>';
 	}
-
+	/**
+	 * Start children element
+	 */
 	function start_lvl(&$output, $depth = 0, $args = Array() )
 	{
 		$indent = str_repeat("\t", $depth);

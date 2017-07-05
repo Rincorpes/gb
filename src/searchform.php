@@ -1,6 +1,12 @@
 <?php
 /**
- * Search Form
+ * Search Form.
+ * Function to custom the search form
+ *
+ * @since 1.0
+ *
+ * @param string $form The HTML for the wordPress search form
+ * @return string The custom form.
  */
 if (!function_exists('gb_search_form')) : 
 	function gb_search_form( $form ) {

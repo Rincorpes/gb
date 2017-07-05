@@ -1,11 +1,11 @@
 <?php
-
 /**
- * Google Analytics Function
+ * Google Analytics Function to load its script*
+ *
+ * @since 1.0
  */
 if ( !function_exists('gb_google_analytics') ) : 
 	function gb_google_analytics() {
-		if (! DEV_ENV) :
 ?>
 <!-- The google analytics script -->
  	<script>
@@ -20,7 +20,6 @@ if ( !function_exists('gb_google_analytics') ) :
 	</script>
 <!-- End of the Google Analytics script -->
 <?php
-	endif;
 	}
 endif;
 add_action('wp_head', 'gb_google_analytics');

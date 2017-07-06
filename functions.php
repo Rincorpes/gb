@@ -314,4 +314,22 @@ function gb_subscribe()
 }
 add_action('wp_ajax_gb_subscribe', 'gb_subscribe');
 add_action('wp_ajax_nopriv_gb_subscribe', 'gb_subscribe');
+
+function gb_main_heading()
+{
+	if (is_home() || is_front_page()) :
+	?>
+		<h1 class="text-hide pull-left hidden-xs">
+			<?php echo the_custom_logo(); ?>
+			<?php bloginfo('name'); ?>
+		</h1>
+	<?php
+	else :
+	?>
+		<span class="h1 pull-left hidden-xs">
+			<?php echo the_custom_logo(); ?>
+		</span>
+	<?php
+	endif;
+}
 ?>

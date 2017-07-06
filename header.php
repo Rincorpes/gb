@@ -49,10 +49,7 @@
 			</div>
 		</div>
 		<div class="container">
-			<h1 class="text-hide pull-left hidden-xs">
-				<?php echo the_custom_logo(); ?>
-				<?php bloginfo('name'); ?>
-			</h1>
+			<?php gb_main_heading(); ?>
 			<?php gb_get_ad('header', 'horizontal', 'chitika'); ?>
 		</div>
 		<nav class="bottom-navbar navbar navbar-default hidden-xs" role="navigation">

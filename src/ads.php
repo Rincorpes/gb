@@ -133,7 +133,7 @@ class GbAd
 	 */
 	private function getAd()
 	{
-		if (!$this->_ad) {
+		if (!$this->_ad || ! EXTERNAL_SCRIPTS) {
 			return '<p><a href="' . get_permalink(get_page_by_title('Contacto')) . '">Contactanos</a> para anunciarte en este espacio.</p>';
 		} else {
 			switch ($this->_type) {

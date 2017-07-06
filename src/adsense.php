@@ -6,6 +6,9 @@
  */
 if ( !function_exists('gb_adsense') ) : 
 	function gb_adsense() {
-		include 'scripts/adsense.php';
+		if (! EXTERNAL_SCRIPTS)
+			return;
+		else
+			include 'scripts/adsense.php';
 	}
 endif;

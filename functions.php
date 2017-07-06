@@ -9,6 +9,15 @@
  */
 
 /**
+ * Disallow facebook and twitter widgets, disallow social buttons
+ * widgets, disallow ads and use third party scrips in local
+ *
+ * This is usefull in local when you don't have a good internet
+ * conection.
+ */
+define('EXTERNAL_SCRIPTS', false);
+
+/**
  * Get function file located in the functions directory
  *
  * @since gb 1.0

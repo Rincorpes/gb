@@ -6,7 +6,10 @@
  */
 if ( !function_exists('gb_google_analytics') ) : 
 	function gb_google_analytics() {
-		include 'scripts/analitycs.php';
+		if (! EXTERNAL_SCRIPTS)
+			return;
+		else
+			include 'scripts/analitycs.php';
 	}
 endif;
-add_action('wp_head', 'gb_google_analytics');
+// add_action('wp_head', 'gb_google_analytics');

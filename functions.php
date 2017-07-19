@@ -38,7 +38,7 @@ function gb_get_function_path($file_name)
  * @global string $wp_version WordPress version.
  */
 if (version_compare($GLOBALS['wp_version'], '4.7-alpha', '<')) {
-	require gb_get_function_path('back-compat');
+	require gb_get_function_path('setup/back-compat');
 	return;
 }
 
@@ -74,7 +74,7 @@ add_action('after_setup_theme', 'gb_content_width', 0);
  * @since gb 1.0
  */
 add_action('after_setup_theme', function(){
-	load_theme_textdomain('vbt', get_template_directory() . '/languages');
+	load_theme_textdomain('gb', get_template_directory() . '/languages');
 });
 
 /**
@@ -84,12 +84,12 @@ add_action('after_setup_theme', function(){
 /**
  * Add theme support
  */
-require_once gb_get_function_path('theme-support');
+require_once gb_get_function_path('setup/theme-support');
 
 /**
  * WordPress Head and other clean options
  */
-require_once gb_get_function_path('cleanup');
+require_once gb_get_function_path('setup/cleanup');
 
 /**
  * Add meta tags to the head
@@ -117,17 +117,17 @@ require_once gb_get_function_path('ads');
 require_once gb_get_function_path('searchform');
 
 /**
- * Load search form widget
+ * Load Google analytics function
  */
 require_once gb_get_function_path('analytics');
 
 /**
- * Load search form widget
+ * Load facebook function
  */
 require_once gb_get_function_path('facebook');
 
 /**
- * Load search form widget
+ * Load adSense function
  */
 require_once gb_get_function_path('adsense');
 

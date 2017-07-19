@@ -94,7 +94,12 @@ require_once gb_get_function_path('setup/cleanup');
 /**
  * Add meta tags to the head
  */
-require_once gb_get_function_path('meta-tags');
+require_once gb_get_function_path('filters/head-meta-tags');
+
+/**
+ * Add opengrph meta tags to the head
+ */
+require_once gb_get_function_path('filters/head-opengraph');
 
 /**
  * Register scripts and stylesheets

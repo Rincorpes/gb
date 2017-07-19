@@ -78,6 +78,97 @@ add_action('after_setup_theme', function(){
 });
 
 /**
+ * Get page title
+ *
+ * @since 1.1.0
+ */
+function gb_get_title()
+{
+	global $page, $paged; 
+
+	$title = wp_title( '|', false, 'right' ); 
+	$title .= get_bloginfo( 'name' );
+
+	if (is_home() || is_front_page())
+		$title .= " | Bitcoin para todos"; 
+	if ( $paged >= 2 || $page >= 2 )
+		$title .= ' | ' . sprintf( __( 'Página %s', 'gb' ), max( $paged, $page ) );
+
+	return $title;
+}
+
+/**
+ * Get page type for opengraph
+ *
+ * @since 1.1.0
+ */
+function gb_get_page_type()
+{
+	$type = 'website';
+
+	if (is_single()) $type = 'article';
+
+	return $type;
+}
+
+/**
+ * Get image for opengraph and twitter cards
+ *
+ * @since 1.1.0
+ */
+function gb_get_page_image()
+{
+	$image = '';
+
+	if (is_single()) {
+		global $post;
+
+		$thumbID = get_post_thumbnail_id($post->ID);
+		$image = wp_get_attachment_url($thumbID);
+	} else {
+		$custom_logo_id = get_theme_mod('custom_logo');
+		$image = wp_get_attachment_image_src($custom_logo_id , 'full');
+
+		$image = $image[0];
+	}
+
+	return $image;
+}
+
+/**
+ * Get page description
+ *
+ * @since 1.1.0
+ */
+function gb_get_page_description()
+{
+	$description = '';
+	$site_description = get_bloginfo( 'description', 'display' );
+
+	if (is_home() || is_front_page() || is_page())
+		$description = $site_description;
+
+	if (is_single()) {
+		$page_id = get_queried_object_id();
+		$excerpt = wp_trim_words(get_the_excerpt($page_id));
+
+		if($excerpt != '')
+			$description = esc_attr($excerpt);
+	}
+
+	if(is_category()) {
+
+		$cat_id = get_queried_object_id();
+		$description = wp_trim_words(wp_strip_all_tags(strip_shortcodes(category_description($cat_id))));
+
+		if($description != '')
+			$description = esc_attr($description);
+	}
+
+	return $description;
+}
+
+/**
  * Require external functions from the functions dir. In this case "src/"
  */
 
@@ -100,6 +191,11 @@ require_once gb_get_function_path('filters/head-meta-tags');
  * Add opengrph meta tags to the head
  */
 require_once gb_get_function_path('filters/head-opengraph');
+
+/**
+ * Add opengrph meta tags to the head
+ */
+require_once gb_get_function_path('filters/head-twitter-card');
 
 /**
  * Register scripts and stylesheets

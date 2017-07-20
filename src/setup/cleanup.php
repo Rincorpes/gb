@@ -24,10 +24,6 @@ function gb_cleanup()
 	 */
 	add_filter('gallery_style', 'gb_gallery_style');
 	/**
-	 * My own personal excerpt
-	 */
-	add_filter('excerpt_more', 'gb_excerpt_more');
-	/**
 	 * Remove WordPress version
 	 */
 	add_action('init', 'gb_remove_wp_version');
@@ -100,19 +96,6 @@ function gb_remove_recent_comments_style()
 function gb_gallery_style($css)
 {
 	return preg_replace("!<style type='text/css'>(.*?)</style>!s", '', $css);
-}
-
-/**
- * This removes the annoying […] to a Read More link
- *
- * @since gb 1.0
- *
- * @param string $more
- * @return string
- */
-function gb_excerpt_more($more)
-{
-	return '<a class="excerpt-read-more" href="'. get_permalink($post->ID) . '" title="'. __('Más', 'gb') . get_the_title($post->ID).'">'. __('... Saber más &raquo;', 'gb') .'</a>';
 }
 
 /**

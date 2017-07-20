@@ -24,7 +24,7 @@ define('EXTERNAL_SCRIPTS', false);
  *
  * @since 1.1.0
  */
-define('GB_VERSION', '1.1.15');
+define('GB_VERSION', '1.1.22');
 
 /**
  * Allow cdn
@@ -285,6 +285,29 @@ function gb_get_styles($style, $index = null, $cdn = CDN)
 }
 
 /**
+ * Remove `<h1>` tag in sigle pages
+ *
+ * @since 1.1
+ */
+function gb_main_heading()
+{
+	if (is_home() || is_front_page()) :
+	?>
+		<h1 class="text-hide pull-left hidden-xs">
+			<?php echo the_custom_logo(); ?>
+			<?php bloginfo('name'); ?>
+		</h1>
+	<?php
+	else :
+	?>
+		<span class="h1 pull-left hidden-xs">
+			<?php echo the_custom_logo(); ?>
+		</span>
+	<?php
+	endif;
+}
+
+/**
  * Require external functions from the functions dir. In this case "src/"
  */
 
@@ -349,134 +372,19 @@ require_once gb_get_function_path('filters/searchform');
 require_once gb_get_function_path('ads/gb-ads');
 
 /**
- * Get posts filtered
- *
- * @since 1.0
+ * Load Loop filter
  */
-function gb_get_posts($params = array())
-{
-	$posts_per_page = (isset($params['posts_per_page'])) ? $params['posts_per_page'] : '10';
-	$offset = (isset($params['offset'])) ? $params['offset'] : '';
-
-	$sliderPosts = new WP_Query(
-		array(
-			'post_type' => 'post',
-			'post_status' => 'publish',
-			'orderby' => 'ASC',
-			'posts_per_page' => $posts_per_page,
-			'offset' => $offset
-			)
-		);
-	return $sliderPosts;
-}
+require_once gb_get_function_path('filters/loop');
 
 /**
- * Get the title from the loop
- *
- * @since 1.0
+ * Load Pagination
  */
-function gb_get_loop_title()
-{
-	$curauth = (get_query_var('author_name')) ? get_user_by('slug', get_query_var('author_name')) : get_userdata(get_query_var('author'));
-
-	if (is_category()) : $title = __( 'Categoria' , 'gb' ) . ' : ' . single_cat_title( '', false );
-	elseif (is_tag()) : $title = __( 'Etiqueta' , 'gb' ) . ' : ' . single_tag_title( '', false);
-	elseif (is_month()) : $title = __( 'Archivos Mensuales' , 'gb' ) . ' : ' . get_the_date('F Y');
-	elseif (is_year()) : $title = __( 'Archivos Anuales' , 'gb' ). ' : ' . get_the_date('Y');
-	elseif (is_search()) : $title = __( 'Buscar resultados de' , 'gb' ) . ' : ' . get_search_query();
-	elseif (is_author()) : $title = __( 'Autor de Archivos', 'gb' ) . ' : ' . $curauth->display_name;
-	elseif (is_archive()) : $title = __( 'Archivo' , 'gb' );
-	endif;
-	
-	return $title;
-}
-/**
- * Shows the paginate links
- *
- * @since 1.0
- */
-if (!function_exists('gb_paginate_links')) : 
-	function gb_paginate_links()
-	{
-	
-		global $wp_query, $wp_rewrite;
-		$wp_query->query_vars['paged'] > 1 ? $current = $wp_query->query_vars['paged'] : $current = 1;
-	
-		$pagination = array(
-			'base' => @add_query_arg('paged','%#%'),
-			'format' => '',
-			'total' => $wp_query->max_num_pages,
-			'current' => $current,
-			'show_all' => true,
-			'type' => 'list'
-		);
-	
-		if( $wp_rewrite->using_permalinks() )
-			$pagination['base'] = user_trailingslashit( trailingslashit( remove_query_arg( 's', get_pagenum_link( 1 ) ) ) . 'page/%#%/', 'paged' );
-	
-		if( !empty($wp_query->query_vars['s']) )
-			$pagination['add_args'] = array( 's' => get_query_var( 's' ) );
-	
-		echo paginate_links( $pagination );
-	}
-endif;
+require_once gb_get_function_path('filters/pagination');
 
 /**
- * Shows comments
- *
- * @since 1.0
+ * Load comments
  */
-if (!function_exists('gb_comments')) : 
-	function gb_comments($comment, $args, $depth)
-	{	
-		$commenter = wp_get_current_commenter();
-		$req = get_option( 'require_name_email' );
-		$aria_req = ( $req ? " aria-required='true'" : '' );
-		
-		$GLOBALS['comment'] = $comment;
-				extract($args, EXTR_SKIP);
-		?>
-		<li class="media" id="comment-<?php comment_ID() ?>">
-
-		    <div class="pull-left">
-		      <div class="media-object">
-		      	<?php if ($args['avatar_size'] != 0) echo get_avatar( $comment, $args['avatar_size'] ); ?>
-		      </div>
-		    </div>
-			    
-			    
-			<div class="media-body">
-		      <h4 class="media-heading"><?php echo get_comment_author_link(); ?></h4>
-
-			  <div class="content">
-
-				<?php if ($comment->comment_approved == '0') : ?>
-					<em class="comment-awaiting-moderation"><?php _e('Your comment is awaiting moderation.') ?></em>
-				<?php endif; ?>
-
-				<?php comment_text() ?>
-
-				<div class="reply">
-					<?php comment_reply_link(array_merge( $args, array('add_below' => $add_below, 'depth' => $depth, 'max_depth' => $args['max_depth']))) ?>
-				</div>
-
-				<div class="comment-meta commentmetadata"><a href="<?php echo htmlspecialchars( get_comment_link( $comment->comment_ID ) ) ?>">
-					<?php
-						/* translators: 1: date, 2: time */
-						printf( __('%1$s a las %2$s'), get_comment_date(),  get_comment_time()) ?></a>
-						<?php edit_comment_link(__('(Editar)'),'  ','' );
-					?>
-				</div>
-
-
-			  </div>
-		 
-		    </div>
-
-		</li>
-		<?php
-	}
-endif;
+require_once gb_get_function_path('filters/comments');
 
 /**
  * Subscribe form action
@@ -531,22 +439,4 @@ function gb_subscribe()
 }
 add_action('wp_ajax_gb_subscribe', 'gb_subscribe');
 add_action('wp_ajax_nopriv_gb_subscribe', 'gb_subscribe');
-
-function gb_main_heading()
-{
-	if (is_home() || is_front_page()) :
-	?>
-		<h1 class="text-hide pull-left hidden-xs">
-			<?php echo the_custom_logo(); ?>
-			<?php bloginfo('name'); ?>
-		</h1>
-	<?php
-	else :
-	?>
-		<span class="h1 pull-left hidden-xs">
-			<?php echo the_custom_logo(); ?>
-		</span>
-	<?php
-	endif;
-}
 ?>

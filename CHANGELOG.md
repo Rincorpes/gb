@@ -1,3 +1,15 @@
+# v-1.1.22
+
+** Changes **
+
+- Slider loop dir changed
+- Older posts loop dir changed
+- Edu widget file name changed
+- ``gb_get_posts()`` and ``gb_get_loop_title()`` functions added to the loop file in the ``src/filters`` dir.
+- ``gb_paginate_links()`` function added to the pagination file in the ``src/filters`` dir.
+- ``gb_comments()`` function added to the pagination file in the ``src/filters`` dir.
+- ``gb_excerpt_more()`` funtion added to the loop file and removed from the ``src/setup/cleanup.php`` file
+
 # v-1.1.15
 
 ** Changes **

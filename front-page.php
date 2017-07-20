@@ -4,17 +4,18 @@
 		<div class="row">
 			<main class="col-md-8" role="main">
 
-				<?php get_template_part('src/slider'); ?>
+				<?php //get_template_part('src/slider'); ?>
+				<?php get_template_part('src/loop/slider'); ?>
 
 				<?php gb_get_ad('main', 'horizontal', 'adsense'); ?>
 
-				<?php get_template_part('src/older-posts'); ?>
+				<?php get_template_part('src/loop/older-posts'); ?>
 
 				<?php gb_get_ad('main', 'horizontal', 'adsense'); ?>
 
 				<div class="row">
 					<div class="col-md-12">
-						<?php get_template_part('src/edu'); ?>
+						<?php get_template_part('src/widget', 'edu'); ?>
 					</div>
 					<div class="col-sm-6">
 						<?php get_template_part('src/widget', 'suscribe'); ?>

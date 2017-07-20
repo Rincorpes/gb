@@ -1,4 +1,5 @@
 <?php $sliderPosts = gb_get_posts(array('posts_per_page' => '4')); ?>
+
 <div class="slider">
 
 	<?php while ( $sliderPosts->have_posts() ) : $sliderPosts->the_post(); ?>

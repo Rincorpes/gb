@@ -24,7 +24,7 @@ define('EXTERNAL_SCRIPTS', false);
  *
  * @since 1.1.0
  */
-define('GB_VERSION', '1.1.10');
+define('GB_VERSION', '1.1.12');
 
 /**
  * Allow cdn
@@ -336,17 +336,17 @@ require_once gb_get_function_path('scripts/adsense');
 /**
  * Load WordPress menus
  */
-require_once gb_get_function_path('menus');
+require_once gb_get_function_path('filters/menus');
+
+/**
+ * Load search form widget
+ */
+require_once gb_get_function_path('filters/searchform');
 
 /**
  * Load Ads
  */
 require_once gb_get_function_path('ads');
-
-/**
- * Load search form widget
- */
-require_once gb_get_function_path('searchform');
 
 /**
  * Get posts filtered

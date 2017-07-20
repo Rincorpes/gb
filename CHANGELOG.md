@@ -1,8 +1,15 @@
+# v-1.1.12
+
+** Changes **
+
+- ``src/menus.php`` muved to ``src/filters`` dir.
+- ``src/searchform.php`` muved to ``src/filters`` dir.
+
 # v-1.1.10
 
 ** Changes **
 
-- Google analytics, facebook and Google adsense php functions moved to ``src/scripts`` dir.
+- Google analytics, facebook and Google adsense php functions muved to ``src/scripts`` dir.
 - **js-** prefix added to analytics, facebook and adsensescripts.
 - Google Analytics script added to ``wp_head()`` action.
 - Google adSense and Facebook sacripts addend to ``wp_footer()`` action.
@@ -18,7 +25,7 @@
 
 ** Changes **
 
-- ``enqueue-scripts.php`` file moved to ``/src/scripts/``
+- ``enqueue-scripts.php`` file muved to ``/src/scripts/``
 - ``bg_get_scripts()`` and ``gb_get_styles()`` functions added to set scripts and stylesheets params.
 - some changes in the enqueue scripts filter
 - ``CDN`` constatnt added as a config param. If true, scripts and styles like bootstrap, jQuery, html5shiv or font awesome will be loaded from cdn and not from local.

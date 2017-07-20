@@ -1,3 +1,10 @@
+# v-1.1.24
+
+** Change **
+
+- ``gb_suscribe()`` function remove from ``functions.php`` and added to ``src/suscribe/gb-suscribe.php``
+- ``src/suscribe/mailchimp-api-config.php`` file added to get from it sensible information like the api key and the list id.
+
 # v-1.1.22
 
 ** Changes **

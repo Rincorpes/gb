@@ -1,3 +1,19 @@
+# v-1.1.10
+
+** Changes **
+
+- Google analytics, facebook and Google adsense php functions moved to ``src/scripts`` dir.
+- **js-** prefix added to analytics, facebook and adsensescripts.
+- Google Analytics script added to ``wp_head()`` action.
+- Google adSense and Facebook sacripts addend to ``wp_footer()`` action.
+
+# v-1.1.6
+
+** Changes **
+
+- ``IE_SUPPORT`` constant added for config porpouse
+- ``gb_html_tag()`` function added.
+
 # v-1.1.4
 
 ** Changes **

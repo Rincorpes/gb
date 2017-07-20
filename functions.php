@@ -24,7 +24,7 @@ define('EXTERNAL_SCRIPTS', false);
  *
  * @since 1.1.0
  */
-define('GB_VERSION', '1.1.4');
+define('GB_VERSION', '1.1.10');
 
 /**
  * Allow cdn
@@ -32,6 +32,13 @@ define('GB_VERSION', '1.1.4');
  * @since 1.1
  */
 define('CDN', false);
+
+/**
+ * IE support
+ *
+ * @since 1.1
+ */
+define('IE_SUPPORT', true);
 
 /**
  * Get function file located in the functions directory
@@ -92,6 +99,24 @@ add_action('after_setup_theme', 'gb_content_width', 0);
 add_action('after_setup_theme', function(){
 	load_theme_textdomain('gb', get_template_directory() . '/languages');
 });
+
+/**
+ * <html> tag with ie support
+ *
+ * @since 1.1
+ */
+function gb_html_tag($attr = array())
+{
+	$id = (isset($attr['id'])) ? 'id="' . $attr['id'] . '"' : '';
+
+	echo '
+	<!--[if lt IE 7 ]> <html' . $id . ' lang="' . $attr['lang'] .'" class="' . $attr['class'] .' ie6"> <![endif]-->
+	<!--[if IE 7 ]> <html' . $id . ' lang="' . $attr['lang'] .'" class="' . $attr['class'] .' ie7"> <![endif]-->
+	<!--[if IE 8 ]> <html' . $id . ' lang="' . $attr['lang'] .'" class="' . $attr['class'] .' ie8"> <![endif]-->
+	<!--[if IE 9 ]> <html' . $id . ' lang="' . $attr['lang'] .'" class="' . $attr['class'] .' ie9"> <![endif]-->
+	<!--[if (gt IE 9)|!(IE)]><!--> <html' . $id . ' lang="' . $attr['lang'] .'" class="' . $attr['class'] .'"> <!--<![endif]-->
+	';
+}
 
 /**
  * Get page title
@@ -226,7 +251,7 @@ function gb_get_script($script, $index = null, $cdn = CDN)
 }
 
 /**
- * Get Scripts params
+ * Get Styles params
  *
  * @since 1.1
  */
@@ -294,6 +319,21 @@ require_once gb_get_function_path('filters/head-twitter-card');
 require_once gb_get_function_path('scripts/enqueue-scripts');
 
 /**
+ * Load Google analytics function
+ */
+require_once gb_get_function_path('scripts/analytics');
+
+/**
+ * Load facebook function
+ */
+require_once gb_get_function_path('scripts/facebook');
+
+/**
+ * Load adSense function
+ */
+require_once gb_get_function_path('scripts/adsense');
+
+/**
  * Load WordPress menus
  */
 require_once gb_get_function_path('menus');
@@ -307,21 +347,6 @@ require_once gb_get_function_path('ads');
  * Load search form widget
  */
 require_once gb_get_function_path('searchform');
-
-/**
- * Load Google analytics function
- */
-require_once gb_get_function_path('analytics');
-
-/**
- * Load facebook function
- */
-require_once gb_get_function_path('facebook');
-
-/**
- * Load adSense function
- */
-require_once gb_get_function_path('adsense');
 
 /**
  * Get posts filtered

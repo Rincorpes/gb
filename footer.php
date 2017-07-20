@@ -73,11 +73,6 @@
 		}
 	</script>
 
-	<!-- Google Adsense code should be here -->
-	<?php gb_adsense(); ?>
-	<!-- facebook code should be here -->
-	<?php gb_facebook(); ?>
-
 	<?php wp_footer(); ?>
 </body>
 </html>

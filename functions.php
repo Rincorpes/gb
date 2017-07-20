@@ -14,8 +14,24 @@
  *
  * This is usefull in local when you don't have a good internet
  * conection.
+ *
+ * @since 1.0
  */
 define('EXTERNAL_SCRIPTS', false);
+
+/**
+ * Version
+ *
+ * @since 1.1.0
+ */
+define('GB_VERSION', '1.1.4');
+
+/**
+ * Allow cdn
+ *
+ * @since 1.1
+ */
+define('CDN', false);
 
 /**
  * Get function file located in the functions directory
@@ -169,6 +185,81 @@ function gb_get_page_description()
 }
 
 /**
+ * Get Scripts params
+ *
+ * @since 1.1
+ */
+function gb_get_script($script, $index = null, $cdn = CDN)
+{
+	$local_jquery_uri = get_template_directory_uri() . '/assets/js/lib/jquery-3.1.0.min.js';
+	$cdn_jquery_uri = 'https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js';
+
+	$local_bootstrap_uri = get_template_directory_uri() . '/assets/js/lib/bootstrap.min.js';
+	$cdn_bootstrap_uri = 'https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js';
+
+	$local_html5shiv_uri = get_theme_file_uri('/assets/js/HTML5shiv.js');
+	$cdn_html5shiv_uri = 'https://cdnjs.cloudflare.com/ajax/libs/html5shiv/3.7.3/html5shiv.min.js';
+
+	$scripts = [
+		'jquery' => [
+			'uri' => ($cdn) ? $cdn_jquery_uri : $local_jquery_uri,
+			'version' => '3.2.1',
+		],
+		'bootstrap' => [
+			'uri' => ($cdn) ? $cdn_bootstrap_uri : $local_bootstrap_uri,
+			'version' => '3.3.7',
+		],
+		'html5shiv' => [
+			'uri' => ($cdn) ? $cdn_html5shiv_uri : $local_html5shiv_uri,
+			'version' => '3.7.3',
+		],
+		'gb' => [
+			'uri' => get_template_directory_uri() . '/assets/js/gb.js',
+			'version' => GB_VERSION,
+		],
+	];
+
+	if ($index)
+		return $scripts[$script][$index];
+	else
+		return $scripts[$script];
+}
+
+/**
+ * Get Scripts params
+ *
+ * @since 1.1
+ */
+function gb_get_styles($style, $index = null, $cdn = CDN)
+{
+	$local_bootstrap_uri = get_template_directory_uri() . '/assets/css/bootstrap.min.css';
+	$cdn_bootstrap_uri = 'https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css';
+
+	$local_fa_uri = get_template_directory_uri() . '/assets/css/font-awesome.css';
+	$cdn_fa_uri = 'https://maxcdn.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css';
+
+	$styles = [
+		'bootstrap' => [
+			'uri' => ($cdn) ? $cdn_bootstrap_uri : $local_bootstrap_uri,
+			'version' => '3.3.7',
+		],
+		'fa' => [
+			'uri' => ($cdn) ? $cdn_fa_uri : $local_fa_uri,
+			'version' => '4.7.0',
+		],
+		'base' => [
+			'uri' => get_template_directory_uri() . '/style.css',
+			'version' => GB_VERSION,
+		],
+	];
+
+	if ($index)
+		return $styles[$style][$index];
+	else
+		return $styles[$style];
+}
+
+/**
  * Require external functions from the functions dir. In this case "src/"
  */
 
@@ -200,7 +291,7 @@ require_once gb_get_function_path('filters/head-twitter-card');
 /**
  * Register scripts and stylesheets
  */
-require_once gb_get_function_path('enqueue-scripts');
+require_once gb_get_function_path('scripts/enqueue-scripts');
 
 /**
  * Load WordPress menus

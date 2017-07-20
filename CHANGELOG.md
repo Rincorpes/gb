@@ -1,3 +1,12 @@
+# v-1.1.4
+
+** Changes **
+
+- ``enqueue-scripts.php`` file moved to ``/src/scripts/``
+- ``bg_get_scripts()`` and ``gb_get_styles()`` functions added to set scripts and stylesheets params.
+- some changes in the enqueue scripts filter
+- ``CDN`` constatnt added as a config param. If true, scripts and styles like bootstrap, jQuery, html5shiv or font awesome will be loaded from cdn and not from local.
+
 # v-1.1.0
 
 ** Changes **

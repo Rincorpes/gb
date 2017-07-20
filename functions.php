@@ -24,7 +24,7 @@ define('EXTERNAL_SCRIPTS', false);
  *
  * @since 1.1.0
  */
-define('GB_VERSION', '1.1.12');
+define('GB_VERSION', '1.1.15');
 
 /**
  * Allow cdn
@@ -346,7 +346,7 @@ require_once gb_get_function_path('filters/searchform');
 /**
  * Load Ads
  */
-require_once gb_get_function_path('ads');
+require_once gb_get_function_path('ads/gb-ads');
 
 /**
  * Get posts filtered

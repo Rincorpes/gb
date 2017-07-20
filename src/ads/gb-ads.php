@@ -155,7 +155,7 @@ class GbAd
 			}
 
 			//$adPath = __DIR__ . '/ads/' . $adPrefix . $adName . '.php';
-			$adPath = gb_get_function_path('ads-' . $adPrefix . $adName);
+			$adPath = gb_get_function_path('ads/js-' . $adPrefix . $adName);
 
 			if (file_exists($adPath)) {
 				ob_start();

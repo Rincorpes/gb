@@ -1,3 +1,9 @@
+# v-1.1.15
+
+** Changes **
+
+- Some changes in Gb Ads subpackage
+
 # v-1.1.12
 
 ** Changes **
